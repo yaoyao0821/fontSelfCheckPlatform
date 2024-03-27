@@ -1,0 +1,40 @@
+{
+  "name": "deobfuscation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "node ./node_server/server.js",
+    "start:run": "webpack && npm run start",
+    "start:quick": "npm run build && npm run info:createfile && npm run start",
+    "version:display": "node ./src/server/echoVersion.js",
+    "info:createfile": "node src/server/generateInfoJson.js"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.6.0",
+    "cors": "^2.8.5",
+    "crypto-js": "^3.1.9-1",
+    "css-loader": "^5.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "file-loader": "^6.2.0",
+    "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "popper.js": "^1.16.1",
+    "underscore": "^1.9.1",
+    "urijs": "^1.19.1"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^1.4.0",
+    "open-browser-webpack-plugin": "latest",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.1.4"
+  }
+}

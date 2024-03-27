@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" charset="utf-8"></script>
+    <title>Font De-Obfuscation Tool</title>
+    <style>
+        h1{
+            padding: 0.5em;
+            font-size: 2em !important;
+            text-align: center;
+        }
+        h2{
+            font-size: 1.5em !important;
+        }
+        h3{
+            font-size: 1.2em !important;
+        }
+        #options-title {
+            margin: 2em;
+            padding: 2em;
+            border-radius: 0.3em;
+            width: auto;
+        }
+        #options-content {
+            margin: 2em;
+            padding: 2em;
+            border-radius: 0.5em;
+            border: 2px solid #ffffff;
+            background: linear-gradient(#a6c4f5 0%, #daeff9 100%);
+            /* background: #afd9ee; */
+            width: auto;
+            -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+            z-index: 3;
+        }
+
+        p.thick {
+            font-weight: 700;
+        }
+        span.example {
+            font-family: monospace;
+            color: rgb(123, 0, 0);
+            font-size: 1.25em;
+        }
+        span.thick {
+            font-weight: 600;
+        }
+        span.instruction-toggle {
+            font-size: .5em;
+            text-decoration: underline;
+            color: darkgreen;
+            cursor: pointer;
+        }
+        span.version-info {
+            font-size: 1.1rem;
+        }
+        span.error {
+            display: none;
+        }
+        span#login {
+            margin: 2em;
+            width: auto;
+            font-size: 3.em;
+            text-decoration: underline;
+            color: rgb(32, 51, 99);
+            cursor: pointer;
+            text-align: right;
+            font-weight: 900;
+        }
+        div.instructions {
+            display: none;
+        }
+        div.row {
+            margin: auto;
+        }
+        input.form-control {
+            width: auto;
+        }
+        img#icon {
+            border-radius: 50%; width: 50px;box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+        /* DCC toggle */
+        div.custom-control.custom-switch.custom-switch-md {
+            text-align:right;
+            padding: inherit;
+        }
+        .custom-switch.custom-switch-md {
+            padding-left: 2rem;
+            padding-bottom: 1.5rem;
+        }
+        .custom-control-label {
+            padding-left: 1rem;
+            padding-top: .2rem;
+        }
+        .custom-switch.custom-switch-md .custom-control-label::before {
+            height: 1.5rem;
+            width: calc(2rem + 0.75rem);
+            border-radius: 3rem;
+        }
+        .custom-switch.custom-switch-md .custom-control-label::after {
+            width: calc(1.5rem - 4px);
+            height: calc(1.5rem - 4px);
+            border-radius: calc(2rem - (1.5rem / 2));
+        }
+        .custom-switch.custom-switch-md .custom-control-input:checked ~ .custom-control-label::after {
+            transform: translateX(calc(1.5rem - 0.25rem));
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    
+    <h1> Font De-Obfuscation Tool 
+        <span class="version-info">
+            <span class="version-label">v</span>
+            <span class="version"></span>
+        </span>
+    </h1>
+    <div>
+        <div class="row">
+            <div class="col-sm-6 pull-left">
+                <span class="" id="login">
+                    <img src="./imgs/login.png" id="icon"/>
+                    &nbsp&nbsp
+                    <span id="loginOrOutTxt"> </span>
+                </span>
+            </div>
+            <div class="col-sm-6 pull-right">
+                <div class="custom-control custom-switch custom-switch-md">
+                    <input type="checkbox" class="custom-control-input" id="dccToggle" checked>
+                    <label class="custom-control-label" for="dccToggle">DCC Prod</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="options-title" class="bg-light text-dark">
+        <div class="row">
+            <div>
+                <p>This is a font de-obfuscation tool that will help generate decrypted font files:
+                     get one certain decrypted font file by path or get all decrypted font files under one book.</p>
+                <p>The instructions are hidden by default. Click on show to reveal them.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div>
+                <h2>Instructions 
+                    <span class="instruction-toggle">show</span>
+                </h2>
+                <div class="instructions">
+                    <ol class="get-by-path-instructions">
+                        <p class="thick">Get a de-obfuscated font file by path & ISBN:</p>
+                        <li>Enter the <span class="thick">book ISBN</span> in the ISBN field.</li>
+                        <li>Enter the <span class="thick">font path</span>. For example, the font file A.ttf is under the folder <span class="example">'9781620140000/OEBPS/font'</span>,
+                             then the input is <span class="example">'/OEBPS/font/A.ttf'</span>.</li>
+                        <li>Optional: Enter the book identifier in the opf file. If the input is empty, the identifier will be fetched automatically.</li>
+                        <li>Optional: Choose the DCC environment (Production/QA) from the upper right toggle button. The default environment is Production.</li>
+                        <li>Click Generate to fetch font file</li>
+                        <li>When the font is ready, click Download to download the font.</li>
+                     </ol>
+                     <ol class="get-all-instructions">
+                        <p class="thick">Get all de-obfuscated font files by ISBN:</p>
+                        <li>Enter the <span class="thick">book ISBN</span> in the ISBN field.</li>
+                        <li>Optional: Choose the DCC environment (Production/QA) from the upper right toggle button. The default environment is Production.</li>
+                        <li>Click Download All to download all decrypted font files under this book.</li>
+                     </ol>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="span6 col-sm" id="options-content">
+                <h3>Generate and Download</h3>
+                <form id="getOne">
+                    <div class="form-group">
+                        <label for="txtIsbn">ISBN * </label><br>
+                        <input class="form-control" type="textbox" size="38" max-length="38" id="txtIsbn" placeholder="Enter book ISBN here" required>
+                        <span class="error text-danger" id="isbnErrorMsg">Please input valid ISBN</span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="txtFontpath"> Font Path * </label><br>
+                        <input class="form-control" type="textbox" size="38" max-length="38" id="txtFontpath" placeholder="Enter font path here" required>
+                        <span class="error text-danger" id="fontPathErrorMsg">Please input valid font path</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtBookId" >Book Identifier（Opt.）</label><br>
+                        <input class="form-control" type="textbox" size="38" max-length="38" id="txtBookId" placeholder="Enter book ID here">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary generate" id="generate">Generate</button>
+                        &nbsp
+                        <span class="text-danger" id="generateError"></span>
+
+                        <label id="generateProgress"> </label>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary download" id="download">Download</button>
+                        &nbsp
+                        <label id="currentFileName"> </label>
+                    </div>
+                </form>
+            </div>
+
+            <div class="span6 col-sm" id="options-content">
+                <h3>Download All</h3>
+                <form>
+                    <div class="form-group">
+                        <label for="txtGetallBookId" >ISBN * </label><br>
+                        <input class="form-control" type="textbox" size="38" max-length="38" id="txtGetallBookId" placeholder="Enter book ISBN here">
+                        <span class="error text-danger" id="getAllIsbnErrorMsg">Please input valid ISBN</span>
+                    </div>           
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary getAll" id="getAll">Download All</button>
+                        <span class="text-danger" id="getAllError"></span>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <span class="thick">Font list:</span>
+                        </div>
+                        <div class="row">
+                            <label id="allFileNames"> Empty </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </div>
+    </div>
+    
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Authorization Error</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="goToLogin">Log in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

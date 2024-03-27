@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" charset="utf-8"></script>
+    <title>Font De-Obfuscation Tool Login</title>
+    <style>     
+      div.error {
+          display: none;
+      }
+    </style>
+    <link rel="stylesheet" href="./login.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="./imgs/signinIcon.png" id="icon" alt="User Icon" style="width: 30%; margin: 3em;"/>
+    </div>
+
+    <!-- Login Form -->
+    <form>
+      <input type="text" id="txtUsername" class="fadeIn second" name="username" placeholder="username">
+      <input type="text" style="-webkit-text-security: disc;" id="txtPwd" class="fadeIn third" name="password" placeholder="password" style>
+      <div class="error text-danger" id="fontPathErrorMsg">Wrong username or password. Please try again.</div>
+      <input type="button" id="submit" class="fadeIn fourth" value="Log In">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class=""  id="backToMain" href="/dev.html">Back to home page</a>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+
+</html>
